@@ -97,9 +97,10 @@
     <Compile Include="src\Configuration\ConfigurationParseException.cs" />
     <Compile Include="src\DirectoryAutocomplete.cs" />
     <Compile Include="src\Logger.cs" />
-    <Compile Include="src\PasswordGeneration\PasswordGenerationOptions.cs" />
-    <Compile Include="src\PasswordGeneration\PasswordGenerator.cs" />
-    <Compile Include="src\PasswordManager.cs" />
+    <Compile Include="src\PasswordManagement\PasswordGenerationOptions.cs" />
+    <Compile Include="src\PasswordManagement\PasswordGenerator.cs" />
+    <Compile Include="src\PasswordManagement\PasswordManager.cs" />
+    <Compile Include="src\PasswordManagement\PasswordStoreManager.cs" />
     <Compile Include="src\PinentryWatcher.cs" />
     <Compile Include="src\Utilities\ExtensionMethods\DirectoryInfoExtensions.cs" />
     <Compile Include="src\Utilities\ExtensionMethods\StringExtensions.cs" />

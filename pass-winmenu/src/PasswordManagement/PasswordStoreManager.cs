@@ -7,7 +7,7 @@ using PassWinmenu.ExternalPrograms;
 using PassWinmenu.Utilities;
 using PassWinmenu.Utilities.ExtensionMethods;
 
-namespace PassWinmenu
+namespace PassWinmenu.PasswordManagement
 {
 	internal struct PasswordFileContent
 	{
@@ -20,7 +20,7 @@ namespace PassWinmenu
 			ExtraContent = extraContent;
 		}
 	}
-	internal class PasswordManager
+	internal class PasswordStoreManager
 	{
 		internal const string GpgIdFileName = ".gpg-id";
 
@@ -31,7 +31,7 @@ namespace PassWinmenu
 		public bool PinentryFixEnabled { get; set; }
 		public readonly string EncryptedFileExtension;
 
-		public PasswordManager(string passwordStore, string encryptedFileExtension, GPG gpg)
+		public PasswordStoreManager(string passwordStore, string encryptedFileExtension, GPG gpg)
 		{
 			var normalised = Helpers.NormaliseDirectory(passwordStore);
 			passwordStoreDirectory = new DirectoryInfo(normalised);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace PassWinmenu.PasswordGeneration
+namespace PassWinmenu.PasswordManagement
 {
 	internal class PasswordGenerator : IDisposable
 	{

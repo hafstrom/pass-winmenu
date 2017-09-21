@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using PassWinmenu.Configuration;
-using PassWinmenu.PasswordGeneration;
+using PassWinmenu.PasswordManagement;
 
 namespace PassWinmenu.Windows
 {

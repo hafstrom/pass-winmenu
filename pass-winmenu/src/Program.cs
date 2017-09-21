@@ -13,6 +13,7 @@ using LibGit2Sharp;
 using PassWinmenu.Hotkeys;
 using PassWinmenu.Configuration;
 using PassWinmenu.ExternalPrograms;
+using PassWinmenu.PasswordManagement;
 using PassWinmenu.Windows;
 using YamlDotNet.Core;
 using Application = System.Windows.Forms.Application;
@@ -30,7 +31,7 @@ namespace PassWinmenu
 		private readonly HotkeyManager hotkeys;
 		private readonly StartupLink startupLink = new StartupLink("pass-winmenu");
 		private Git git;
-		private PasswordManager passwordManager;
+		private PasswordStoreManager passwordManager;
 
 		public Program()
 		{
@@ -65,7 +66,7 @@ namespace PassWinmenu
 			AssignHotkeys(hotkeys);
 
 			var gpg = new GPG(ConfigManager.Config.GpgPath);
-			passwordManager = new PasswordManager(ConfigManager.Config.PasswordStore, EncryptedFileExtension, gpg);
+			passwordManager = new PasswordStoreManager(ConfigManager.Config.PasswordStore, EncryptedFileExtension, gpg);
 			passwordManager.PinentryFixEnabled = ConfigManager.Config.PinentryFix;
 
 			if (ConfigManager.Config.UseGit)

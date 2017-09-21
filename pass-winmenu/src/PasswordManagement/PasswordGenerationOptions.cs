@@ -1,4 +1,4 @@
-﻿namespace PassWinmenu.PasswordGeneration
+﻿namespace PassWinmenu.PasswordManagement
 {
 	internal class PasswordGenerationOptions
 	{
