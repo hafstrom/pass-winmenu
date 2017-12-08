@@ -93,8 +93,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Configuration\ConfigUpgrader.cs" />
     <Compile Include="src\Configuration\ConfigurationException.cs" />
     <Compile Include="src\Configuration\ConfigurationParseException.cs" />
+    <Compile Include="src\Configuration\ConfigVersion.cs" />
+    <Compile Include="src\Configuration\LoadResult.cs" />
     <Compile Include="src\DirectoryAutocomplete.cs" />
     <Compile Include="src\ExternalPrograms\GpgAgent.cs" />
     <Compile Include="src\Logger.cs" />
@@ -184,6 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="embedded\version.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Configuration\Upgrades\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -225,3 +225,5 @@ style:
         background-colour: '#FFD88900'
         border-colour: '#FF000000'
         border-width: 0
+
+config-version: 1.0
