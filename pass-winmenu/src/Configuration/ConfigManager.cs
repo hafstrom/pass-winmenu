@@ -49,7 +49,7 @@ namespace PassWinmenu.Configuration
 			else
 			{
 				Log.Send($"Config file is at version {fileVersion}, upgrading to {ConfigVersion.LatestVersion}");
-				Config = new ConfigUpgrader().UpgradeFrom(fileVersion, ParseConfigFile<dynamic>(fileName));
+				Config = new ConfigUpgrader().UpgradeFrom(fileVersion, ParseConfigFile<Dictionary<string, object>>(fileName));
 				return LoadResult.FileUpgraded;
 			}
 
@@ -57,7 +57,9 @@ namespace PassWinmenu.Configuration
 
 		private static T ParseConfigFile<T>(string fileName)
 		{
-			var deserialiser = new Deserializer(namingConvention: new HyphenatedNamingConvention());
+			var builder = new DeserializerBuilder().WithNamingConvention(new HyphenatedNamingConvention());
+			var deserialiser = builder.Build();
+
 			using (var reader = File.OpenText(fileName))
 			{
 				return deserialiser.Deserialize<T>(reader);

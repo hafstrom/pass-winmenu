@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace PassWinmenu.Configuration
@@ -8,8 +9,8 @@ namespace PassWinmenu.Configuration
 		public int Major { get; }
 		public int Minor { get; }
 
-		public static ConfigVersion V0_1 = new ConfigVersion(0, 1);
-		public static ConfigVersion V1_0 = new ConfigVersion(1, 0);
+		public static ConfigVersion V0_1 { get; } = new ConfigVersion(0, 1);
+		public static ConfigVersion V1_0 { get; } = new ConfigVersion(1, 0);
 
 		// When adding a new config version, update this pointer
 		public static ConfigVersion LatestVersion => V1_0;
@@ -35,10 +36,10 @@ namespace PassWinmenu.Configuration
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as ConfigVersion;
-			return other != null &&
-					Major == other.Major &&
-					Minor == other.Minor;
+			var version = obj as ConfigVersion;
+			return version != null &&
+				   Major == version.Major &&
+				   Minor == version.Minor;
 		}
 
 		public override int GetHashCode()
@@ -47,6 +48,16 @@ namespace PassWinmenu.Configuration
 			hashCode = hashCode * -1521134295 + Major.GetHashCode();
 			hashCode = hashCode * -1521134295 + Minor.GetHashCode();
 			return hashCode;
+		}
+
+		public static bool operator ==(ConfigVersion version1, ConfigVersion version2)
+		{
+			return EqualityComparer<ConfigVersion>.Default.Equals(version1, version2);
+		}
+
+		public static bool operator !=(ConfigVersion version1, ConfigVersion version2)
+		{
+			return !(version1 == version2);
 		}
 
 		public override string ToString() => $"{Major}.{Minor}";
