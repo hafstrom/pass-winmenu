@@ -155,7 +155,7 @@ namespace PassWinmenu
 
 		private void LoadConfigFile()
 		{
-			ConfigManager.LoadResult result;
+			LoadResult result;
 			try
 			{
 				result = ConfigManager.Load("pass-winmenu.yaml");
@@ -187,10 +187,10 @@ namespace PassWinmenu
 
 			switch (result)
 			{
-				case ConfigManager.LoadResult.FileCreationFailure:
+				case LoadResult.FileCreationFailure:
 					RaiseNotification("A default configuration file was generated, but could not be saved.\nPass-winmenu will fall back to its default settings.", ToolTipIcon.Error);
 					break;
-				case ConfigManager.LoadResult.NewFileCreated:
+				case LoadResult.NewFileCreated:
 					MessageBox.Show("A new configuration file has been generated. Please modify it according to your preferences and restart the application.");
 					Exit();
 					return;

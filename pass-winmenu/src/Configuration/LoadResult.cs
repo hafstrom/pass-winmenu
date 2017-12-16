@@ -1,13 +1,10 @@
 ﻿namespace PassWinmenu.Configuration
 {
-	internal partial class ConfigManager
+	public enum LoadResult
 	{
-		public enum LoadResult
-		{
-			Success,
-			FileCreationFailure,
-			NewFileCreated,
-			FileUpgraded
-		}
+		Success,
+		FileCreationFailure,
+		NewFileCreated,
+		FileUpgraded
 	}
 }
