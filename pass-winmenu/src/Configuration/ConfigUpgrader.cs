@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace PassWinmenu.Configuration
 {
@@ -42,6 +44,9 @@ namespace PassWinmenu.Configuration
 			}
 		}
 
+		/// <summary>
+		/// Sets the value of a config key at the given path.
+		/// </summary>
 		public static void SetValue(this Dictionary<string, object> configData, string path, object value)
 		{
 			var split = path.Split('.');
@@ -101,6 +106,9 @@ namespace PassWinmenu.Configuration
 			}
 		}
 
+		/// <summary>
+		/// Retrieves the value of a config key at the given path, or null if no value exists.
+		/// </summary>
 		public static object GetValue(this Dictionary<string, object> configData, string path)
 		{
 			var split = path.Split('.');
@@ -133,9 +141,11 @@ namespace PassWinmenu.Configuration
 		public static VersionedConfigData UpgradeFrom_V0_1(Dictionary<string, object> configData)
 		{
 			configData.MoveNode("gpg-path", "gpg.gpg-path");
-			configData.MoveNode("gnupghome-override", "gpg.gnpghome-override");
+			configData.MoveNode("gnupghome-override", "gpg.gnupghome-override");
 			configData.MoveNode("pinentry-fix", "gpg.pinentry-fix");
 			configData.MoveNode("preload-gpg-agent", "gpg.gpg-agent.preload");
+
+			configData.SetValue("config-version", ConfigVersion.V1_0.ToString());
 
 			return new VersionedConfigData(ConfigVersion.V1_0, configData);
 		}
@@ -166,7 +176,21 @@ namespace PassWinmenu.Configuration
 			}
 
 			// Transform data into a Config object.
+			var yaml = ToYaml(currentConfig.ConfigData);
+
+			var defaultConfig = new Config();
+			var defaultYaml = ToYaml(defaultConfig);
+
+
 			return null;
+		}
+
+		internal string ToYaml(object configData)
+		{
+			return new SerializerBuilder()
+				.WithNamingConvention(new HyphenatedNamingConvention())
+				.Build()
+				.Serialize(configData);
 		}
 
 		internal VersionedConfigData UpgradeFrom(VersionedConfigData source)
